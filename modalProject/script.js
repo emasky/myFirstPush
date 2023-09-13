@@ -23,3 +23,12 @@ function closeModal1() {
   modal.classList.add('hidden');
   overlay.classList.add('hidden');
 }
+
+document.addEventListener('keydown', e => {
+  console.log(e.key);
+  if (e.key == 'Escape') {
+    if (!modal.classList.contains('history')) {
+      closeModal1();
+    }
+  }
+});
