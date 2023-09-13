@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        background-color: darkorange;
+      }
+
+      h1 {
+        text-align: center;
+        color: white;
+        margin-top: 5%;
+      }
+
+      .todoBOX {
+        /* border: thin solid red; */
+        margin: 8% auto;
+        min-height: 5vh;
+        width: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      #inputVal {
+        border: none;
+        padding: 13.5px;
+        width: 80%;
+        border-top-left-radius: 10px;
+        border-bottom-left-radius: 10px;
+      }
+
+      #TaskButton {
+        width: 20%;
+        border: none;
+        border-top-right-radius: 10px;
+        border-bottom-right-radius: 10px;
+        padding: 10px;
+        background-color: rgb(255, 238, 0);
+        color: black;
+        font-weight: 700;
+        font-size: 1.2rem;
+      }
+
+      #display {
+        width: 70%;
+        margin: auto;
+      }
+
+      .BigTaskDiv {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 20px;
+      }
+
+      .taskdiv {
+        background-color: rgb(21, 8, 68);
+        box-shadow: 0px 4px 15px 2px black;
+        color: white;
+        border-radius: 10px;
+        margin-bottom: 10px;
+        font-size: 1.1rem;
+        padding: 20px;
+        width: 70%;
+      }
+
+      #Delete {
+        width: 10%;
+        border: none;
+        border-radius: 10px;
+        padding: 10px 0;
+        background-color: rgb(23, 2, 31);
+        color: white;
+        font-weight: 700;
+        font-size: 1.2rem;
+      }
+
+      #searcp {
+        /* display: none; */
+        width: 30%;
+        margin: auto;
+        /* border: thin solid black; */
+        margin-bottom: 20px;
+        margin-top: -60px;
+        display: none;
+      }
+
+      #searchINP {
+        width: 100%;
+        padding: 10px;
+        border-radius: 10px;
+        border: none;
+      }
+
+      #error {
+        background-color: red;
+        font-size: 1.3rem;
+        font-weight: 700;
+        width: 50%;
+        margin: auto;
+        text-align: center;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1>TO-DO APP</h1>
+
+    <div class="todoBOX">
+      <input type="text" placeholder="enter task here...." id="inputVal" />
+      <button id="TaskButton">Add Task</button>
+    </div>
+
+    <div id="searcp">
+      <input
+        type="text"
+        placeholder="search for task"
+        id="searchINP"
+        oninput="filterTODO()"
+      />
+    </div>
+
+    <div id="error"></div>
+    <div id="display"></div>
+
+    <script>
+      let todo = [];
+
+      TaskButton.addEventListener('click', () => {
+        if (inputVal.value !== '') {
+          todo.push(inputVal.value);
+          localStorage.setItem('todolis', JSON.stringify(todo));
+
+          console.log(todo);
+
+          Display();
+
+          error.style.display = 'none';
+          if (todo.length >= 4) {
+            searcp.style.display = 'block';
+          }
+        } else if (inputVal.value === '') {
+          error.innerHTML = `<div id="errortext">PLEASE ENTER YOUR TASK</div>`;
+        }
+      });
+
+      function Display() {
+        display.innerHTML = '';
+        todo.forEach((elem, i) => {
+          display.innerHTML += `
+            
+                    <div class="BigTaskDiv">
+                        <div class="taskdiv">${i + 1}) ${elem}</div>
+                        <button id="Delete" onclick ="erase(${i})">Delete</button>
+                    </div>
+                
+                `;
+        });
+      }
+      Display();
+
+      function erase(id) {
+        todo.splice(id, 1);
+
+        Display();
+      }
+
+      function filterTODO() {
+        display.innerHTML = '';
+        let filterD = todo.filter((elem, i) => {
+          return elem.includes(searchINP.value);
+        });
+
+        filterD.forEach((elem, i) => {
+          display.innerHTML += `
+                    <div class="BigTaskDiv">
+                        <div class="taskdiv">${i + 1}) ${elem}</div>
+                        <button id="Delete" onclick ="erase(${i})">Delete</button>
+                    </div>
+
+                `;
+        });
+
+        if (todo.length === 0) {
+          searcp.style.display = 'none';
+        }
+      }
+
+      // document.addEventListener('DOMContentLoaded', () => {
+      //     const storedTasks = localStorage.getItem('todolis');
+
+      //     if (storedTasks) {
+      //         todo = JSON.parse(storedTasks);
+      //         Display();
+      //     }
+      // });
+
+      // Rest of your existing JavaScript code
+    </script>
+  </body>
+</html>

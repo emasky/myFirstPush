@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    // object destructing
+    let user = {
+        name: 'jacob',
+        age: 30
+    }
+    const { name, age } = user
+    console.log(name);
+
+    let array = [1, 2, 3, 4, 5, 6, 7,]
+    const [num, a, ...rest] = array
+    console.log(num,);
+    console.log(rest);
+
+    // spred operator 
+    let odd = [1, 3, 5]
+    let even = [2, 4, 6]
+    let number = odd.concat(even)
+    let numb = [...even, ...odd]
+    console.log(number);
+    console.log(numb);
+
+
+
+    // nested object destructuring 
+
+
+    let userN = {
+        name: 'jacob',
+        age: 30,
+        address: { state: 'oyo', city: 'ibadan' }
+    }
+    const { name, age, address: { city, state } } = userN
+    console.log(city, state);
+</script>
+
+</html>

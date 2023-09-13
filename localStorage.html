@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <button onclick="deleteStorage()"> delete</button>
+    <BUtton onclick=" redirect()"> ABOUT </BUtton>
+</body>
+<script>
+    //JSON
+    let user = {
+        name: 'Ben',
+        age: 10
+    }
+    localStorage.setItem('name', JSON.stringify(user))
+
+    let localStr = JSON.parse(localStorage.getItem('name'))
+    console.log(localStr);
+
+
+    function deleteStorage(param) {
+        localStorage.removeItem('name')
+        // localStorage.clear
+    }
+    function redirect() {
+        window.location.href = `./about.html`
+        // window.location.reload()
+    }
+</script>
+
+</html>

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+            h1{
+                text-align: center;
+            }
+        #display{
+
+            margin:0 200px;
+            display: grid;
+            grid-template-columns: repeat(3,1fr);
+            grid-auto-rows: 35px;
+            row-gap: 20px;
+            padding: 30px;
+            background-color: rgb(156, 156, 156);
+            justify-items: center;
+            border-radius: 10px;
+        }
+
+        button{
+            width: 100px;
+        }
+
+        input{
+            margin:0 500px;
+            margin-bottom: 30px;
+            padding: 10px 30px;
+            background-color: gainsboro;
+            border: none;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+    
+    <h1>SEARCH FOR YOUR STATE</h1>
+
+    
+    <input type="text" name="" id="inputt" oninput="filteRR()">
+
+    <div id="display">
+
+    </div>
+
+
+
+    <script>
+
+
+let states = [
+               
+                'crossriver',
+                'delta',
+                'osun',
+                'taraba',
+                'yobe',
+                'ebonyi',
+                'edo',
+                'ekiti',
+                'zamfara',
+                'enugu',
+                'gombe',
+                'imo',
+                'jigawa',
+                'oyo',
+                'plateau',
+                'rivers',
+                'sokoto',
+                'kaduna',
+                'kano',
+                'abia',
+                'adamawa',
+                'akwaibom',
+                'anambra',
+                'bauchi',
+                'bayelsa',
+                'katsina',
+                'kebbi',
+                'kogi',
+                'kwara',
+                'lagos',
+                'nasarawa',
+                'niger',
+                'ogun',
+                'benue',
+                'borno',
+                'ondo'
+               
+
+        ]
+
+
+        function deF(){
+
+            states.forEach((elem,i)=>{
+
+                display.innerHTML += `<button>${states[i]}</button>`
+                })
+       }
+
+       deF()
+
+
+       function filteRR(){
+
+            display.innerHTML = ''
+                
+            let filterD = states.filter((elem)=> elem.includes(inputt.value))
+                // console.log(filterD);
+            let sorted = filterD.sort()
+
+
+            sorted.forEach((elem,i)=>{
+
+                display.innerHTML += `<button>${sorted[i]}</button>`
+            })
+
+                // if(inputt.value.length = 0){
+                //     deF()
+                // } 
+        }
+
+
+
+    </script>
+</body>
+</html>

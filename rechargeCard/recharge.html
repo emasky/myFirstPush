@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
+      crossorigin="anonymous"
+    />
+  </head>
+  <style>
+    #box{
+        text-align: left;
+        color: blue;
+    }
+    #generate{
+        border-radius: 10px;
+        background-color: green;
+    }
+
+    .left {
+      padding: auto;
+      text-align: justify 30px;;
+      width: 52rem;
+      display:block;
+      flex-direction: column;
+    align-items: left;
+}
+.right {
+  width: 52rem;
+  font-size: 2rem;
+}
+
+    body{
+      background-color: green;
+    }
+    header{
+      text-align: center;
+    }
+  </style>
+  <body>
+
+    <header><h1>RECHARGER CARD GENERATOR</h1></header>
+    <p></p>
+    <p></p>
+    <div class="form-group" >
+      <section class="left">
+        SELECT Network
+          <select class="custom-select" id="net" >
+            <option value="" disabled selected>Open this select menu</option>
+            <option value="MTN">MTN</option>
+            <option value="ETISALAT" >ETISALAT</option>
+            <option value="Airtel">Airtel</option>
+          </select>
+       
+      </section>
+      <p></p>
+      <div id="box">
+        Amount:
+        <select  id="amo">
+          <option value="" disabled selected>Select Amount</option>
+          <option value="1000">1000</option>
+          <option value="500">500</option>
+          <option value="200">200</option>
+        </select>
+        <p></p>
+        Code: <input type="number" id="cod" />
+        <button id="generate">Generate Pin</button>
+        <button id="save">Save pin</button>
+    <div>
+     
+      <p></p>
+      <p></p>
+    </div>
+      
+
+    please enter pin <input type="text" id="inputPIN"><button onclick="rechargeMe()">Enter pin</button>
+    <p></p>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">s/n</th>
+          <th scope="col">Network</th>
+          <th scope="col">Amount</th>
+          <th scope="col">pin</th>
+          <th scope="col">code</th>
+          <th scope="col">status</th>
+          <th scope="col">Delete</th>
+        </tr>
+      </thead>
+
+      <tbody id="displa"></tbody>
+    </table>
+</div>
+  </body>
+
+  <script>
+    let dataRecharge = [];
+
+    save.addEventListener('click', () => {
+      dataRecharge = JSON.parse(localStorage.getItem('card'));
+      let network = net.value;
+      let amount = amo.value;
+      let code = cod.value;
+      let status = false;
+
+      let pin = {
+        Glo: '*123*',
+        MTN: '*556*',
+        Airtel: '*123*',
+        ETISALAT: '*223*',
+      };
+
+      let a = pin[network];
+      console.log(a);
+      //   if (net.value === 'MTN') {
+      //     pin = '*556*';
+      //   } else if (net.value === 'Glo') {
+      //     pin = '*123*';
+      //   } else if (net.value === 'Airtel') {
+      //     pin = '*232*';
+      //   } else if (net.value === 'ETISALAT') {
+      //     pin = '*444*';
+      //   }
+
+      let cardBought = {
+        network,
+        amount,
+        code,
+        a,
+        status,
+      };
+      dataRecharge.push(cardBought);
+      localStorage.setItem('card', JSON.stringify(dataRecharge));
+      console.log(dataRecharge);
+
+      displayCard();
+
+      
+
+
+
+
+    });
+
+    function generateDIsplay(){
+      let random = Math.floor(Math.random() * 200000000000) + 1;
+      cod.value = random;
+    }
+
+    generate.addEventListener('click', () => {
+      if( net.value!=='' && amo.value!=='' )
+      generateDIsplay()
+    });
+function del(id){
+    dataRecharge.splice(id,1)
+    localStorage.setItem('card', JSON.stringify(dataRecharge))
+    displayCard()
+}
+    function displayCard() {
+      let dataRecharge = JSON.parse(localStorage.getItem('card'));
+      displa.innerHTML = '';
+      dataRecharge.forEach((element, i) => {
+        displa.innerHTML += `
+        <tbody>
+            <tr>
+                <th scope="col">${i + 1}</th>
+                <th scope="col">${element.network}</th>
+                <th scope="col">${element.amount}</th>
+                <th scope="col">${element.code}</th>
+                <th scope="col">${element.a}${element.code}#</th>
+                <th scope="col">${element.status ? 'used': 'unused'}</th>
+                <th><button onclick= 'del(${i})'>Delete</button><th>
+                </tr>
+        </tbody>
+        `;
+      });
+    }
+
+    displayCard();
+    let used = false
+
+    function rechargeMe(){
+    let found = false
+
+      dataRecharge.forEach((element)=>{
+        let creditCard = element.a + element.code + '#'
+        // console.log(creditCard);
+        if (inputPIN.value === creditCard){
+          if (element.status === true){
+            used = true
+            found = true
+          }
+          else{
+            alert('recharge successful')
+            element.status =true
+            found=true
+          }
+        }
+      })
+      if (used === true){
+        alert('this card has been used ')
+      } 
+
+      if (!found){
+        alert('input card')
+      }
+      localStorage.setItem('card',JSON.stringify(dataRecharge))
+      displayCard()
+      inputPIN.value=''
+
+    }
+
+
+  </script>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    name: <input type="text" id="nam">
+    age: <input type="text" id="ag">
+    relationship status:<input type="text" id="rela">
+    <button id="button">Submit</button>
+
+
+    <div id="display"></div>
+</body>
+<script>
+    person = {
+        name: '',
+        age: '',
+        relationship: '',
+
+    }
+
+    button.addEventListener('click', () => {
+        // ({ name: nam.value, age: ag.value, relationship: rela.value })
+        person.name = nam.value
+        person.age = ag.value
+        person.relationship = rela.value
+        displayPerson()
+    })
+
+    function displayPerson() {
+        const { name, age, relationship } = person
+        display.innerHTML = '',
+            display.innerHTML = `<p>NAME :${name}</p>
+                <p>age :${age}</p>
+                <p>relationship: ${relationship}</p>`
+    }
+</script>
+
+</html>

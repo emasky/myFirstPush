@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    let number = [1, 2, 3, 4, 5, 6, 7]
+
+    // find number 
+    let find = number.find((elem) => elem === 3)
+    console.log(find);
+
+
+    // find and get the index 
+    let findIndex = number.findIndex((elem) => elem === 5)
+    console.log(findIndex);
+
+    // some
+    let somed = number.some((elem) => elem % 3 === 0)
+    console.log(somed);
+
+    // every element must be true
+    let everyed = number.every((elem) => elem % 2 === 0)
+    console.log(everyed);
+
+    // reduce
+    let product = [
+        { name: 'lolipop', price: 30 },
+        { name: 'sweet', price: 320 },
+        { name: 'rice', price: 330 },
+        { name: 'bean', price: 340 },
+    ]
+    let calculate = product.reduce((acc, cur) => {
+        return acc + cur.price
+    }, 0)
+    console.log(calculate);
+
+    let food = ['rice', 'bean', 'garri', 'yeam', 'dodo']
+    let price = [50, 60, 2, 29, 55]
+    let sorted = price.sort((a, b) => {
+        return a - b
+    })
+
+</script>
+
+</html>

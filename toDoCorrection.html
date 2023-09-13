@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    #box {
+        height: 500px;
+        width: 200px;
+        color: blue;
+    }
+</style>
+
+<body>
+    <div id="box">
+        <input type="text" id="inpval">
+        <button id="button">To Do </button>
+        <div id="ui"></div>
+    </div>
+</body>
+
+</html>
+<script>
+    let todo = []
+    button.addEventListener('click', () => {
+        todo.push(inpval.value)
+        displayTodo()
+        inpval.value = ''
+    })
+    function displayTodo() {
+        ui.innerHTML = ''
+        todo.forEach((elem) => {
+            ui.innerHTML += `
+            <p>${elem}</p>
+            `
+        })
+    }
+    displayTodo()
+
+</script>
