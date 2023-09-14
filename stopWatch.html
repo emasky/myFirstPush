@@ -6,26 +6,37 @@
     <title>Document</title>
   </head>
   <body>
+    <h1>COUNTDOWN TIMING</h1>
     <div>
-      select number
+      ENTER MINUTE
       <input type="number" name="" id="time" />
+      ENTER SEC
+      <input type="number" id="seconds" />
     </div>
     <div>
       <button id="setTime">Set time!</button>
+      <button id="stopTime">stop Time</button>
     </div>
     <div id="display"></div>
   </body>
   <script>
+    let stopWatch;
     setTime.addEventListener('click', () => {
-      let timeBox = time.value;
-      let timeIncre = setInterval(() => {
-        timeBox--;
+      let timeBox = parseInt(time.value);
+      let secods = parseInt(seconds.value);
+      let covert = timeBox * 60 + secods;
+      stopWatch = setInterval(() => {
+        covert--;
 
-        if (timeBox <= 0) {
-          clearInterval(timeIncre);
+        if (covert <= 0) {
+          clearInterval(stopWatch);
         }
-        display.innerHTML = timeBox;
+        display.innerHTML = covert;
       }, 1000);
+    });
+
+    stopTime.addEventListener('click', () => {
+      clearInterval(stopWatch);
     });
   </script>
 </html>
