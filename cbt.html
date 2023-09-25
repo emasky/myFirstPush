@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    body {
+      background-color: aqua;
+    }
+    h1 {
+      margin-top: 150px;
+      text-align: center;
+      color: goldenrod;
+    }
+    #button {
+      text-align: center;
+    }
+    .show {
+      font-size: 2rem;
+      font-weight: 600;
+      padding: 1.75rem 3.5rem;
+      margin: 5rem 2rem;
+      border: none;
+      background-color: #fff;
+      color: #444;
+      border-radius: 10rem;
+      cursor: pointer;
+    }
+    .displayy {
+      background-color: rgb(18, 62, 78);
+      width: auto;
+      height: 250px;
+    }
+  </style>
+  <body>
+    <h1>CURRENT AFFAIRS QUIZ</h1>
+    <div id="button">
+      <button onclick="startQuiz()" id="start" class="show">START QUIZ</button>
+    </div>
+    <div class="dispalyy">
+      <div id="display"></div>
+      <button id="submit" style="display: none">Submit</button>
+      <div id="result"></div>
+    </div>
+  </body>
+</html>
+
+<script>
+  let index = 0;
+  let quiz = [
+    {
+      question: 'what is the name of Nigerian president',
+      option: ['a:muhameed buhari', 'b:Bola hammed Tinubu', 'c:peter obi'],
+      correctAnswer: 'b:Bola hammed Tinubu',
+      select: '',
+    },
+    {
+      question: 'what is the name of oyo state Governor ',
+      option: ['a:Gov Adeleke', 'b:alaji sowolu', 'c:Eng seyi makinde'],
+      correctAnswer: 'c:Eng seyi makinde',
+      select: '',
+    },
+    {
+      question: 'Nigeria independent was when',
+      option: ['a:Oct 1st 1960', 'b:june 12 1999', 'c:july 20'],
+      correctAnswer: 'c:Oct 1st 1960',
+      select: '',
+    },
+
+    {
+      question: 'How many ethnic groups do we have in Nigeria?',
+      option: [
+        'a:350 ethnic groups',
+        'b:250 ethnic groups',
+        'b:100 ethnics groups',
+      ],
+      correctAnswer: 'b:250 ethnic groups',
+      select: '',
+    },
+  ];
+  // console.log(quiz[0].option);
+  // let submitButton = document.getElementById('submit');
+  let questions;
+  function startQuiz() {
+    questions = quiz[index];
+    display.innerHTML = `<h3>${index + 1}. ${questions.question}</h3>`;
+
+    quiz[index].option.forEach(ele => {
+      if (ele == quiz[index].select) {
+        display.innerHTML += `<form><input type="radio" checked='true'name="hello" id=""> ${ele}</form>`;
+      } else {
+        display.innerHTML += `<form><input type="radio" name="hello" id="" onchange="choose('${ele}')">  ${ele}</form>`;
+      }
+    });
+
+    display.innerHTML += ` <br> <button onclick="previous()">PREV </button>
+    <br>
+        <button onclick="next()"> NEXT </button>`;
+  }
+  start.addEventListener('click', () => {
+    startQuiz();
+    submit.style.display = 'block';
+  });
+
+  function choose(option) {
+    quiz[index].select = option;
+    console.log(quiz);
+  }
+  function next() {
+    if (index < quiz.length - 1) {
+      index++;
+      startQuiz();
+    }
+  }
+  function previous() {
+    if (index > 0) {
+      index--;
+      startQuiz();
+    }
+  }
+
+  submit.addEventListener('click', () => {
+    let score = 0;
+    quiz.forEach((elem, i) => {
+      if (elem.correctAnswer === elem.select) {
+        score++;
+      }
+      console.log(score);
+    });
+    result.innerHTML = ` <h1> you got ${score} out of ${quiz.length} question correctly</h1>`;
+  });
+</script>

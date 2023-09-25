@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>Regular Expression</h1>
+    enter number
+    <input type="text" id="phoneNumber" />
+    <button onclick="myClick()">submit</button>
+  </body>
+  <script>
+    // let regex = /[0-9a-b]/i; // add i to make it case insenstitive
+
+    // let name = 'isreal';
+
+    // regex.test(name);
+    // console.log(regex.test(name));
+    function myClick() {
+      let regex = /^\+234[0-9]{10}$/;
+      let phone = phoneNumber.value;
+      regex.test(phone);
+      if (regex.test(phone)) {
+        alert('number pass');
+      } else {
+        alert('the number isnt correct');
+      }
+    }
+
+    // [a-z 0-9] to check if it appear in the reference words
+    //{3,9} to check the lenght of the character
+  </script>
+</html>

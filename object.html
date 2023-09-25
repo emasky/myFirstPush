@@ -1,58 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-</head>
+  </head>
 
-<body>
+  <body>
     <div>
-        <input type="text" id="phoneTel">
+      <input type="text" id="phoneTel" />
     </div>
     <div id="display"></div>
-
-</body>
-<script>
+  </body>
+  <script>
     let phoneArry = [
-        { name: 'Antony', telNO: 8485984 },
-        { name: 'jacob Ramsey', telNO: 4758374 },
-        { name: 'luke shaw', telNO: 746955 }
-    ]
+      { name: 'Antony', telNO: 8485984 },
+      { name: 'jacob Ramsey', telNO: 4758374 },
+      { name: 'luke shaw', telNO: 746955 },
+      { name: 'mark antony', telNO: 455746955 },
+    ];
 
     let filteredPbook = [];
 
-    localStorage.setItem('phonebook', JSON.stringify(phoneArry))
-    let localStr = JSON.parse(localStorage.getItem('phonebook'))
+    localStorage.setItem('phonebook', JSON.stringify(phoneArry));
+    let localStr = JSON.parse(localStorage.getItem('phonebook'));
 
     function displayContact() {
-        display.innerHTML = ''
-        filteredPbook.forEach(contact => {
-            display.innerHTML += `
+      display.innerHTML = '';
+      filteredPbook.forEach(contact => {
+        display.innerHTML += `
         <div>
             <p> Name: ${contact.name}</p>
             <p>Name: ${contact.telNO}</p>
             </div>
-        `
-        })
+        `;
+      });
     }
     phoneTel.addEventListener('input', () => {
-        let userInput = phoneTel.value.toLowerCase()
-        if (userInput === '') {
-            display.innerHTML = ''
-            return
-        }
-        console.log(localStr);
-        filteredPbook = localStr.filter((element) => {
-            let name = element.name.toLowerCase()
-            let num = element.telNO.toString()
-            return num.startsWith(userInput) || name.startsWith(userInput)
-        })
+      let userInput = phoneTel.value.toLowerCase();
+      if (userInput === '') {
+        display.innerHTML = '';
+        return;
+      }
+      console.log(localStr);
+      filteredPbook = localStr.filter(element => {
+        let name = element.name.toLowerCase();
+        let num = element.telNO.toString();
+        return num.startsWith(userInput) || name.startsWith(userInput);
+      });
 
-        console.log(filteredPbook);
-        displayContact()
-    })
-</script>
-
+      console.log(filteredPbook);
+      displayContact();
+    });
+  </script>
 </html>
