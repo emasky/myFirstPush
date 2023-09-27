@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<style>
+    *{
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    body{
+        background-color: rgb(255, 255, 160);
+    }
+
+    h1{
+        text-align: center;
+        color: #fff;
+        border-bottom: thin solid black;
+        width: 60%;
+        margin: auto;
+        margin-bottom: 20px;
+    }
+    
+    .list{
+        background-color: #423c03b4;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        color: white;
+        padding: 10px;
+        margin-top: 10px;
+        flex: 50%;
+    }
+
+    #deleteBTN{
+        /* flex: 5%; */
+        padding: 10px;
+        border-radius: 5px;
+        border: none;
+        font-weight: 700;
+        background-color: rgb(241, 4, 63);
+        color: white;
+    }
+    #container{
+        background-color: #fde723;
+        box-shadow: 0px 0px 8px 2px rgba(0, 0, 0, 0.671);
+        border-radius: 5px;
+        min-height: 50vh;
+        width: 50%;
+        margin:100px auto ;
+        padding: 20px;
+    }
+
+    input{
+        padding: 10px;
+        width: 50%;
+        border-radius: 5px;
+        border: none;
+        margin-right: 10px;
+    }
+
+    #addBTN{
+        padding: 10px;
+        border-radius: 5px;
+        border: none;
+        font-weight: 700;
+        background-color: rgb(110, 11, 36);
+        color: white;
+    }
+
+    #inputdiv{
+        /* background-color: gray; */
+        width: 70%;
+        text-align: center;
+        margin: auto;
+    }
+
+
+</style>
+<body>
+    
+
+
+    <div id="container">
+
+        <h1>MY TODO-LIST APP</h1>
+
+        <div id="inputdiv">
+            <input type="text" name="" id="taskinput" placeholder="Enter you Task here...">
+            <button id="addBTN">ADD TASK</button>
+        </div>
+
+        <div id="displayList">
+
+        </div>
+    </div>
+
+    <script>
+        let todos = []
+
+
+        // A todo CLASS - for creating a todo object template  
+        class Todo{
+            constructor(task){
+                this.task = task
+            }
+
+            static displaytask(){
+                console.log(todos);
+                
+                displayList.innerHTML =''
+                todos.forEach((elem,i)=>{
+                    displayList.innerHTML += `
+                    
+                        <div class="list">${i+1}). ${elem.task}
+                            
+                            <button id="deleteBTN" onclick ="del(${i})">Delete</button>
+                            
+                        </div>
+                        
+
+                    `
+                })
+            }
+
+            static deleteTask(id){
+               todos.splice(id,1)
+            }
+        }
+
+        //a button that adds the task to the array object and also displays it by calling the display function from the CLASS
+        addBTN.addEventListener('click',()=>{
+            let tasklist = new Todo(taskinput.value)
+            if(taskinput.value != ''){
+
+                 todos.push(tasklist)
+          
+                Todo.displaytask()
+            }else{
+                alert('Please input your Task')
+            }
+           
+
+        })
+
+        //a function that calls the delete function from the CLASS using a parameter/argument
+        function del(id){
+    
+            Todo.deleteTask(id)
+            Todo.displaytask()
+            
+        }
+
+
+    </script>
+</body>
+</html>
